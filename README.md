@@ -18,3 +18,9 @@ You'll need Ruby to run [trmnl-preview](https://github.com/usetrmnl/trmnlp) or D
 ```bash
 NATIONAL_RAIL_API_KEY=<your-api-key-here> bin/trmnlp serve
 ```
+
+## Attributions
+
+The data feed is [powered by National Rail Enquiries](https://www.nationalrail.co.uk/developers/).
+
+The icon used in the plugin catalogue is [from the Material Design icons](https://github.com/Templarian/MaterialDesign/blob/master/LICENSE).
