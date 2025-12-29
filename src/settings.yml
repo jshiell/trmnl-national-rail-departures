@@ -9,6 +9,23 @@ polling_headers: content-type=text/xml&SOAPAction=http://thalesgroup.com/RTTI/20
 polling_body: "<soap:Envelope\r\n    xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\"\r\n    xmlns:typ=\"http://thalesgroup.com/RTTI/2013-11-28/Token/types\"\r\n    xmlns:ldb=\"http://thalesgroup.com/RTTI/2021-11-01/ldb/\"\r\n>\r\n   <soap:Header>\r\n      <typ:AccessToken>\r\n        <typ:TokenValue>{{ api_key }}</typ:TokenValue>\r\n      </typ:AccessToken>\r\n   </soap:Header>\r\n   <soap:Body>\r\n      <ldb:GetDepBoardWithDetailsRequest>\r\n        <ldb:numRows>10</ldb:numRows>\r\n        <ldb:crs>{{ departing_crs }}</ldb:crs>\r\n        <ldb:filterType>to</ldb:filterType>\r\n        <ldb:filterCrs>{{ arriving_crs }}</ldb:filterCrs>\r\n      </ldb:GetDepBoardWithDetailsRequest>\r\n   </soap:Body>\r\n</soap:Envelope>"
 id: 203604
 custom_fields:
+- keyname: author_bio
+  name: About This Plugin
+  category: travel
+  field_type: author_bio
+  description: |
+    National Rail Departures displays the upcoming departures from a chosen station to a particular destination.
+    <br><br>
+    <strong>Prerequisites</strong>
+    <br>
+    You will need:<br>
+    1. A National Rail API key: http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/<br>
+    2. The CRS code for your departure and destination stations, which can be found on the National Rail website: https://www.nationalrail.co.uk/
+    <br><br>
+    <strong>Attributions</strong>
+    <br>
+    The data feed is powered by National Rail Enquiries: https://www.nationalrail.co.uk/developers/
+  github_url: https://github.com/jshiell/trmnl-national-rail-departures
 - keyname: departing_crs
   field_type: string
   name: Departing From
