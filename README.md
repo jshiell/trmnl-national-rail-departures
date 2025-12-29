@@ -9,7 +9,7 @@ A [TRMNL](https://usetrmnl.com) extension to display National Rail departures fr
 You'll need:
 
 * An API key for the National Rail Darwin API, [which you can get here](http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/).
-* The CRS codes for the departure and destination stations, which you can find on [the National Rail website](https://www.nationalrail.co.uk/). e.g. St. Pancras is STP; St. Albans City is SAC; and so on.
+* The CRS codes for the departure and destination stations, which you can find on [the National Rail website](https://www.nationalrail.co.uk/). e.g. St Pancras is STP; St Albans City is SAC; and so on.
 
 ## Running Locally
 
