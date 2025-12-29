@@ -40,4 +40,4 @@ custom_fields:
   description: Your API key for the National Rail web services
   help_text: <a href="https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/">You must register for an API key</a> if you don't already have one
 name: National Rail Departures
-refresh_interval: 1440
+refresh_interval: 15
