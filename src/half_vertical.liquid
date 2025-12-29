@@ -8,6 +8,8 @@
                 <th><span class="title">Stat</span></th>
                 <th><span class="title">ETA</span></th>
             </tr>
+        </thead>
+        <tbody>
             {% for service in result.trainServices.service %}
             <tr>
                 <td><span class="label">{{ service.std }}</span></td>
@@ -17,7 +19,7 @@
                     <span class="label">
                     {% if service.etd != "On time" %}
                         {% unless service.etd == "Cancelled" %}
-                        Expected 
+                        Exp
                         {% endunless %}
                         {{ service.etd }}
                     {% endif %}
@@ -35,7 +37,7 @@
                 </td>
             </tr>
             {% endfor %}
-        </thead>
+        </tbody>
     </table>
 </div>
 <div class="title_bar">
