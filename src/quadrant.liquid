@@ -1,0 +1,44 @@
+<div class="layout">
+    <table class="table" data-table-limit="true">
+        <thead>
+            <tr>
+                <th><span class="title">ETD</span></th>
+                <th><span class="title">To</span></th>
+                <th><span class="title">Plat</span></th>
+                <th><span class="title">Stat</span></th>
+                <th><span class="title">ETA</span></th>
+            </tr>
+            {% for service in result.trainServices.service %}
+            <tr>
+                <td><span class="label">{{ service.std }}</span></td>
+                <td><span class="label" data-clamp="1">{{ service.destination.location.crs }}</span></td>
+                <td><span class="label">{{ service.platform }}</span></td>
+                <td>
+                    <span class="label">
+                    {% if service.etd != "On time" %}
+                        {% unless service.etd == "Cancelled" %}
+                        Expected 
+                        {% endunless %}
+                        {{ service.etd }}
+                    {% endif %}
+                    </span>
+                </td>
+                <td>
+                    <span class="label">
+                        {% assign destination = service.subsequentCallingPoints.callingPointList.callingPoint | where: "crs", service.filtercrs | first %}
+                        {% if destination.et != "On time" %}
+                        Est {{ destination.et }}
+                        {% else %}
+                        {{ destination.st }}
+                        {% endif %}
+                    </span>
+                </td>
+            </tr>
+            {% endfor %}
+        </thead>
+    </table>
+</div>
+<div class="title_bar">
+    <span class="title">{{ result.crs }} to {{ result.filtercrs }}</span>
+    <span class="instance">{{  result.generatedAt | date: "%H:%M - %d/%m/%y" }}</span>
+</div>

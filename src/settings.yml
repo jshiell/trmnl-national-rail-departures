@@ -1,0 +1,25 @@
+---
+strategy: polling
+no_screen_padding: "no"
+dark_mode: "no"
+static_data: ""
+polling_verb: post
+polling_url: https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb12.asmx
+polling_headers: content-type=text/xml&SOAPAction=http://thalesgroup.com/RTTI/2015-05-14/ldb/GetDepBoardWithDetails
+polling_body: "<soap:Envelope\r\n    xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\"\r\n    xmlns:typ=\"http://thalesgroup.com/RTTI/2013-11-28/Token/types\"\r\n    xmlns:ldb=\"http://thalesgroup.com/RTTI/2021-11-01/ldb/\"\r\n>\r\n   <soap:Header>\r\n      <typ:AccessToken>\r\n        <typ:TokenValue>{{ api_key }}</typ:TokenValue>\r\n      </typ:AccessToken>\r\n   </soap:Header>\r\n   <soap:Body>\r\n      <ldb:GetDepBoardWithDetailsRequest>\r\n        <ldb:numRows>10</ldb:numRows>\r\n        <ldb:crs>{{ departing_crs }}</ldb:crs>\r\n        <ldb:filterType>to</ldb:filterType>\r\n        <ldb:filterCrs>{{ arriving_crs }}</ldb:filterCrs>\r\n      </ldb:GetDepBoardWithDetailsRequest>\r\n   </soap:Body>\r\n</soap:Envelope>"
+custom_fields:
+  - keyname: departing_crs
+    field_type: string
+    name: Departing From
+    description: The CRS code for the departure station
+  - keyname: arriving_crs
+    field_type: string
+    name: Arriving At
+    description: The CRS code for the arrival station
+  - keyname: api_key
+    field_type: string
+    name: API Key
+    description: Your API key for the National Rail web services
+    help_text: <a href="https://realtime.nationalrail.co.uk/OpenLDBWSRegistration/">You must register for an API key</a> if you don't already have one
+name: National Rail Departures
+refresh_interval: 1440
