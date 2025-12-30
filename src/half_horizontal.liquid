@@ -11,8 +11,19 @@
         </thead>
         <tbody>
             {% for service in result.trainServices.service %}
+            {% assign destination = service.subsequentCallingPoints.callingPointList.callingPoint | where: "crs", result.filtercrs | first %}
             <tr>
-                <td><span class="label">{{ service.std }}</span></td>
+                <td>
+                    <span class="label">{{ service.std }}</span>
+                    {% if fast_train_threshold > 0 %}
+                    {% assign departure_time = "now" | date: "%d %B %Y " | append: service.std | date: "%s" | divided_by: 60 %}
+                    {% assign arrival_time = "now" | date: "%d %B %Y " | append: destination.st | date: "%s" | divided_by: 60 %}
+                    {% assign duration = arrival_time | minus: departure_time %}
+                    {% if duration < fast_train_threshold %}
+                    <span class="image image-stroke">{{ fast_train_logo }}</span>
+                    {% endif %}
+                    {% endif %}
+                </td>
                 <td><span class="label" data-clamp="1">{{ service.destination.location.locationName }}</span></td>
                 <td><span class="label">{{ service.platform }}</span></td>
                 <td>
@@ -25,7 +36,6 @@
                 </td>
                 <td>
                     <span class="label">
-                        {% assign destination = service.subsequentCallingPoints.callingPointList.callingPoint | where: "crs", result.filtercrs | first %}
                         {% if destination.isCancelled == "true" %}
                         Cancelled
                         {% elsif destination.et != "On time" %}

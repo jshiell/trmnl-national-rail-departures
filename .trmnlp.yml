@@ -11,6 +11,7 @@ custom_fields:
   departing_crs: "SAC"
   arriving_crs: "STP"
   api_key: "{{ env.NATIONAL_RAIL_API_KEY }}"
+  fast_train_threshold: 25
 # override variables
 variables:
   trmnl: {}
