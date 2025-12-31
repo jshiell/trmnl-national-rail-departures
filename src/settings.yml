@@ -19,7 +19,7 @@ custom_fields:
     <strong>Prerequisites</strong>
     <br>
     You will need:<br>
-    1. A National Rail API key. If you don't already have one, you can request one <a href="http://realtime.nationalrail.co.uk/OpenLDBWSRegistration">at the National Rail Developers website</a>.
+    1. A National Rail API key. If you don't already have one, you can request one <a href="http://realtime.nationalrail.co.uk/OpenLDBWSRegistration">at the National Rail Developers website</a>.<br>
     2. The CRS code for your departure and destination stations, which can be found <a href="https://www.nationalrail.co.uk/">on the National Rail website</a>.
     <br><br>
     <strong>Attributions</strong>
