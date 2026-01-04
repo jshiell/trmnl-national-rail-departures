@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for service in result.trainServices.service %}
+            {% for service in result.trainServices.service limit: 8%}
             {% assign destination = service.subsequentCallingPoints.callingPointList.callingPoint | where: "crs", result.filtercrs | first %}
             <tr>
                 <td>
