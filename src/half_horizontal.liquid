@@ -39,7 +39,7 @@
                     <span class="label">
                         {% if destination.isCancelled == "true" %}
                         Cancelled
-                        {% elsif destination.et != "On time" %}
+                        {% elsif destination.et != "On time" and destination.et != "Delayed" %}
                         Est {{ destination.et }}
                         {% else %}
                         {{ destination.st }}

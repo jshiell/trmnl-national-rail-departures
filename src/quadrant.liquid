@@ -30,7 +30,7 @@
                 <td>
                     <span class="label">
                     {% if service.etd != "On time" %}
-                        {% unless service.etd == "Cancelled" %}
+                        {% unless service.etd == "Cancelled" or service.etd == "Delayed" %}
                         Exp 
                         {% endunless %}
                         {{ service.etd }}
@@ -41,7 +41,7 @@
                     <span class="label">
                         {% if destination.isCancelled == "true" %}
                         Cancelled
-                        {% elsif destination.et != "On time" %}
+                        {% elsif destination.et != "On time" and destination.et != "Delayed" %}
                         Est {{ destination.et }}
                         {% else %}
                         {{ destination.st }}
