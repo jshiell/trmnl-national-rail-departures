@@ -1,5 +1,5 @@
 <div class="layout layout--top">
-    <table class="table" data-table-limit="true">
+    <table class="table" data-table-limit="true" table-overflow-counter="false">
         <thead>
             <tr>
                 <th><span class="title">Departure</span></th>
@@ -11,7 +11,7 @@
         </thead>
         <tbody>
             {% if result_count > 0 %}
-            {% for service in result.trainServices.service limit: 3 %}
+            {% for service in result.trainServices.service %}
             {% assign destination = service.subsequentCallingPoints.callingPointList.callingPoint | where: "crs", result.filtercrs | first %}
             <tr>
                 <td>
