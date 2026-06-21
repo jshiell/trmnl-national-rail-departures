@@ -1,64 +1,72 @@
 <div class="layout layout--top">
-    <table class="table" data-table-limit="true" table-overflow-counter="false">
-        <thead>
-            <tr>
-                <th><span class="title">ETD</span></th>
-                <th><span class="title">To</span></th>
-                <th><span class="title">Plat</span></th>
-                <th><span class="title">Stat</span></th>
-                <th><span class="title">ETA</span></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% if result_count > 0 %}
-            {% for service in result.trainServices.service %}
-            {% assign destination = service.subsequentCallingPoints.callingPointList.callingPoint | where: "crs", result.filtercrs | first %}
-            <tr>
-                <td>
-                    <span class="label">{{ service.std }}</span>
-                    {% if fast_train_threshold > 0 %}
-                    {% assign departure_time = "now" | date: "%d %B %Y " | append: service.std | date: "%s" | divided_by: 60 %}
-                    {% assign arrival_time = "now" | date: "%d %B %Y " | append: destination.st | date: "%s" | divided_by: 60 %}
-                    {% assign duration = arrival_time | minus: departure_time %}
-                    {% if duration < fast_train_threshold %}
-                    <span class="image image-stroke">{{ fast_train_logo }}</span>
-                    {% endif %}
-                    {% endif %}
-                </td>
-                <td><span class="label" data-clamp="1">{{ service.destination.location.crs }}</span></td>
-                <td><span class="label">{{ service.platform }}</span></td>
-                <td>
-                    <span class="label">
-                    {% if service.etd != "On time" %}
-                        {% unless service.etd == "Cancelled" or service.etd == "Delayed" %}
-                        Exp 
-                        {% endunless %}
-                        {{ service.etd }}
-                    {% endif %}
-                    </span>
-                </td>
-                <td>
-                    <span class="label">
-                        {% if destination.isCancelled == "true" %}
-                        Cancelled
-                        {% elsif destination.et != "On time" and destination.et != "Delayed" %}
-                        Est {{ destination.et }}
-                        {% else %}
-                        {{ destination.st }}
+    <div class="flex flex--col">
+        {% if result.nrccMessages.message %}
+        <div class="flex flex--row flex--left">
+            <div class="image image-stroke">{{ alert_logo }}</div>
+            <div class="description stretch-x" data-clamp="2">{{ result.nrccMessages.message | strip_html }}</div>
+        </div>
+        {% endif %}
+        <table class="table" data-table-limit="true" table-overflow-counter="false">
+            <thead>
+                <tr>
+                    <th><span class="title">ETD</span></th>
+                    <th><span class="title">To</span></th>
+                    <th><span class="title">Plat</span></th>
+                    <th><span class="title">Stat</span></th>
+                    <th><span class="title">ETA</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if result_count > 0 %}
+                {% for service in result.trainServices.service %}
+                {% assign destination = service.subsequentCallingPoints.callingPointList.callingPoint | where: "crs", result.filtercrs | first %}
+                <tr>
+                    <td>
+                        <span class="label">{{ service.std }}</span>
+                        {% if fast_train_threshold > 0 %}
+                        {% assign departure_time = "now" | date: "%d %B %Y " | append: service.std | date: "%s" | divided_by: 60 %}
+                        {% assign arrival_time = "now" | date: "%d %B %Y " | append: destination.st | date: "%s" | divided_by: 60 %}
+                        {% assign duration = arrival_time | minus: departure_time %}
+                        {% if duration < fast_train_threshold %}
+                        <span class="image image-stroke">{{ fast_train_logo }}</span>
                         {% endif %}
-                    </span>
-                </td>
-            </tr>
-            {% endfor %}
-            {% else %}
-            <tr>
-                <td colspan="5">
-                    <span class="label">No services scheduled</span>
-                </td>
-            </tr>
-            {% endif %}
-        </tbody>
-    </table>
+                        {% endif %}
+                    </td>
+                    <td><span class="label" data-clamp="1">{{ service.destination.location.crs }}</span></td>
+                    <td><span class="label">{{ service.platform }}</span></td>
+                    <td>
+                        <span class="label">
+                        {% if service.etd != "On time" %}
+                            {% unless service.etd == "Cancelled" or service.etd == "Delayed" %}
+                            Exp 
+                            {% endunless %}
+                            {{ service.etd }}
+                        {% endif %}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="label">
+                            {% if destination.isCancelled == "true" %}
+                            Cancelled
+                            {% elsif destination.et != "On time" and destination.et != "Delayed" %}
+                            Est {{ destination.et }}
+                            {% else %}
+                            {{ destination.st }}
+                            {% endif %}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="5">
+                        <span class="label">No services scheduled</span>
+                    </td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
 </div>
 <div class="title_bar">
     <span class="title">{{ result.crs }} to {{ result.filtercrs }}</span>
