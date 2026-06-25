@@ -3,7 +3,13 @@
         {% if result.nrccMessages.message %}
         <div class="flex flex--row flex--left">
             <div class="image image-stroke">{{ alert_logo }}</div>
-            <div class="description stretch-x" data-clamp="3">{{ result.nrccMessages.message | strip_html }}</div>
+            <div class="description stretch-x" data-clamp="3">
+                {% if result.nrccMessages.message.first %}
+                {{ result.nrccMessages.message | join: " " | strip_html }}
+                {% else %}
+                {{ result.nrccMessages.message | strip_html }}
+                {% endif %}
+            </div>
         </div>
         {% endif %}
         <table class="table" data-table-limit="true" table-overflow-counter="false">
